@@ -117,6 +117,30 @@
   .stock { color: var(--text-dim); font-size: 0.78rem; text-align: right; }
   .stock.sold-out { color: #f87171; font-weight: 600; }
 
+  .thumb {
+    width: 46px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    background: #0f1115;
+    display: block;
+  }
+  .thumb-placeholder {
+    width: 46px;
+    height: 64px;
+    border-radius: 5px;
+    border: 1px dashed var(--border);
+    background: #0f1115;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    text-align: center;
+  }
+  .name-cell { display: flex; align-items: center; gap: 10px; }
+
   .pagination {
     display: flex;
     justify-content: center;
@@ -243,7 +267,6 @@
         <th data-sort="rarity">版本</th>
         <th data-sort="number">卡號</th>
         <th data-sort="price">現貨價 (¥)</th>
-        <th data-sort="stock">庫存</th>
       </tr>
     </thead>
     <tbody id="tableBody"></tbody>
@@ -258,33 +281,33 @@
 
 <script>
 const CARDS = [
-  {rank:1, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"MUR", number:"113/076", price:160000, stock:10, soldOut:false},
-  {rank:2, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SAR", number:"110/076", price:65000, stock:18, soldOut:false},
-  {rank:3, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SAR", number:"108/076", price:8500, stock:13, soldOut:false},
-  {rank:4, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SR", number:"095/076", price:5800, stock:24, soldOut:false},
-  {rank:5, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SAR", number:"112/076", price:3000, stock:13, soldOut:false},
-  {rank:6, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SAR", number:"109/076", price:2000, stock:4, soldOut:false},
-  {rank:7, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"SR", number:"096/076", price:1900, stock:6, soldOut:false},
-  {rank:8, nameJp:"カイオーガ", nameCn:"蓋歐卡", rarity:"AR", number:"080/076", price:1800, stock:68, soldOut:false},
-  {rank:9, nameJp:"グラードン", nameCn:"固拉多", rarity:"AR", number:"084/076", price:1800, stock:79, soldOut:false},
-  {rank:10, nameJp:"カクレオン", nameCn:"變隱龍", rarity:"AR", number:"088/076", price:1800, stock:79, soldOut:false},
-  {rank:11, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SAR", number:"107/076", price:1700, stock:9, soldOut:false},
-  {rank:12, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SR", number:"102/076", price:1100, stock:18, soldOut:false},
-  {rank:13, nameJp:"ギリー", nameCn:"吉利", rarity:"SAR", number:"111/076", price:1100, stock:9, soldOut:false},
-  {rank:14, nameJp:"ガーディ", nameCn:"卡蒂狗", rarity:"AR", number:"078/076", price:950, stock:122, soldOut:false},
-  {rank:15, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"RR", number:"062/076", price:850, stock:41, soldOut:false},
-  {rank:16, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"RR", number:"058/076", price:850, stock:47, soldOut:false},
-  {rank:17, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SR", number:"092/076", price:600, stock:10, soldOut:false},
-  {rank:18, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SR", number:"089/076", price:550, stock:17, soldOut:false},
-  {rank:19, nameJp:"ルリリ", nameCn:"露力麗", rarity:"AR", number:"086/076", price:550, stock:86, soldOut:false},
-  {rank:20, nameJp:"ぼうけんのランタン", nameCn:"（待核對）", rarity:"SR", number:"097/076", price:550, stock:35, soldOut:false},
-  {rank:21, nameJp:"MCの盛り上げ", nameCn:"MC的炒熱氣氛", rarity:"SR", number:"100/076", price:500, stock:26, soldOut:false},
-  {rank:22, nameJp:"メガカラマネロex", nameCn:"（待核對）", rarity:"SR", number:"094/076", price:500, stock:23, soldOut:false},
-  {rank:23, nameJp:"ヒートロトムex", nameCn:"加熱洛托姆ex", rarity:"SR", number:"090/076", price:500, stock:23, soldOut:false},
-  {rank:24, nameJp:"ヨワシex", nameCn:"弱丁魚ex", rarity:"SR", number:"091/076", price:500, stock:47, soldOut:false},
-  {rank:25, nameJp:"フウとランの修行", nameCn:"（待核對）", rarity:"SR", number:"103/076", price:500, stock:31, soldOut:false},
-  {rank:26, nameJp:"チルタリス", nameCn:"（待核對）", rarity:"AR", number:"087/076", price:500, stock:74, soldOut:false},
-  {rank:27, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SR", number:"093/076", price:500, stock:17, soldOut:false},
+  {rank:1, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"MUR", number:"113/076", price:160000, img:"img/113-MUR.jpg"},
+  {rank:2, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SAR", number:"110/076", price:65000, img:"img/110-SAR.jpg"},
+  {rank:3, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SAR", number:"108/076", price:8500, img:"img/108-SAR.jpg"},
+  {rank:4, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SR", number:"095/076", price:5800, img:"img/095-SR.jpg"},
+  {rank:5, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SAR", number:"112/076", price:3000, img:"img/112-SAR.jpg"},
+  {rank:6, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SAR", number:"109/076", price:2000, img:"img/109-SAR.jpg"},
+  {rank:7, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"SR", number:"096/076", price:1900, img:"img/096-SR.jpg"},
+  {rank:8, nameJp:"カイオーガ", nameCn:"蓋歐卡", rarity:"AR", number:"080/076", price:1800, img:"img/080-AR.jpg"},
+  {rank:9, nameJp:"グラードン", nameCn:"固拉多", rarity:"AR", number:"084/076", price:1800, img:"img/084-AR.jpg"},
+  {rank:10, nameJp:"カクレオン", nameCn:"變隱龍", rarity:"AR", number:"088/076", price:1800, img:null},
+  {rank:11, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SAR", number:"107/076", price:1700, img:"img/107-SAR.jpg"},
+  {rank:12, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SR", number:"102/076", price:1100, img:null},
+  {rank:13, nameJp:"ギリー", nameCn:"吉利", rarity:"SAR", number:"111/076", price:1100, img:null},
+  {rank:14, nameJp:"ガーディ", nameCn:"卡蒂狗", rarity:"AR", number:"078/076", price:950, img:null},
+  {rank:15, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"RR", number:"062/076", price:850, img:null},
+  {rank:16, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"RR", number:"058/076", price:850, img:null},
+  {rank:17, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SR", number:"092/076", price:600, img:null},
+  {rank:18, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SR", number:"089/076", price:550, img:null},
+  {rank:19, nameJp:"ルリリ", nameCn:"露力麗", rarity:"AR", number:"086/076", price:550, img:null},
+  {rank:20, nameJp:"ぼうけんのランタン", nameCn:"（待核對）", rarity:"SR", number:"097/076", price:550, img:null},
+  {rank:21, nameJp:"MCの盛り上げ", nameCn:"MC的炒熱氣氛", rarity:"SR", number:"100/076", price:500, img:null},
+  {rank:22, nameJp:"メガカラマネロex", nameCn:"（待核對）", rarity:"SR", number:"094/076", price:500, img:null},
+  {rank:23, nameJp:"ヒートロトムex", nameCn:"加熱洛托姆ex", rarity:"SR", number:"090/076", price:500, img:null},
+  {rank:24, nameJp:"ヨワシex", nameCn:"弱丁魚ex", rarity:"SR", number:"091/076", price:500, img:null},
+  {rank:25, nameJp:"フウとランの修行", nameCn:"（待核對）", rarity:"SR", number:"103/076", price:500, img:null},
+  {rank:26, nameJp:"チルタリス", nameCn:"（待核對）", rarity:"AR", number:"087/076", price:500, img:null},
+  {rank:27, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SR", number:"093/076", price:500, img:null},
 ];
 
 let state = {
@@ -325,7 +348,6 @@ function getFiltered() {
       case "rarity": av = a.rarity; bv = b.rarity; break;
       case "number": av = a.number; bv = b.number; break;
       case "price": av = a.price; bv = b.price; break;
-      case "stock": av = a.stock; bv = b.stock; break;
       default: av = a.rank; bv = b.rank;
     }
     if (typeof av === "string") return av.localeCompare(bv) * dir;
@@ -353,16 +375,23 @@ function render() {
 
   pageRows.forEach(c => {
     const tr = document.createElement("tr");
+    const thumbHtml = c.img
+      ? `<img class="thumb" src="${c.img}" alt="${c.nameJp}" loading="lazy">`
+      : `<div class="thumb-placeholder">無圖</div>`;
     tr.innerHTML = `
       <td class="rank cell-rank" data-label="名次">#${c.rank}</td>
       <td class="cell-name" data-label="卡牌名稱">
-        <div class="name-jp">${c.nameJp}</div>
-        <div class="name-cn">${c.nameCn}</div>
+        <div class="name-cell">
+          ${thumbHtml}
+          <div>
+            <div class="name-jp">${c.nameJp}</div>
+            <div class="name-cn">${c.nameCn}</div>
+          </div>
+        </div>
       </td>
       <td data-label="版本"><span class="rarity-badge rarity-${c.rarity}">${c.rarity}</span></td>
       <td class="num" data-label="卡號">${c.number}</td>
       <td class="price" data-label="現貨價">¥${c.price.toLocaleString()}</td>
-      <td class="stock ${c.soldOut ? 'sold-out' : ''}" data-label="庫存">${c.soldOut ? 'SOLD OUT' : '在庫 ' + c.stock}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -414,7 +443,7 @@ document.querySelectorAll("thead th").forEach(th => {
       state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
     } else {
       state.sortKey = key;
-      state.sortDir = key === "price" || key === "stock" ? "desc" : "asc";
+      state.sortDir = key === "price" ? "desc" : "asc";
     }
     render();
   });
