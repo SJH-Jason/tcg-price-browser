@@ -225,15 +225,21 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>💎 綠寶石風暴 M6 卡價查詢</h1>
-    <div class="subtitle">ストームエメラルダ／Storm Emeralda・日版現貨參考價（來源：晴れる屋2 hareruya2.com）</div>
+    <h1>💎 MEGA 系列卡價查詢</h1>
+    <div class="subtitle" id="setSubtitle">日版現貨參考價（來源：晴れる屋2 hareruya2.com）</div>
     <div class="meta-note">
-      資料抓取時間：2026-08-15 下午・共收錄 27 張卡・<strong>收錄門檻：日圓現貨價 ¥500 以上才選入</strong>（低於此價位多為大量印製的量產卡，價格幾乎同一水位、參考意義低，不逐一收錄）。
-      日圓現貨掛牌價，非成交歷史；隨時間會變動，重要決策前建議回頭核對即時價格。中文譯名部分卡片尚未逐一核對官方繁中站，標示「待核對」。
+      資料抓取時間：2026-08-15 下午・<strong>收錄門檻：日圓現貨價 ¥500 以上才選入</strong>（低於此價位多為大量印製的量產卡，價格幾乎同一水位、參考意義低，不逐一收錄）。
+      日圓現貨掛牌價，非成交歷史；隨時間會變動，重要決策前建議回頭核對即時價格。中文譯名部分卡片尚未逐一核對官方繁中站，標示「待核對」。M5 套組卡圖尚未收錄。
     </div>
   </header>
 
   <div class="controls">
+    <div class="field">
+      <label for="setFilter">卡包套組</label>
+      <select id="setFilter">
+        <option value="">全部套組</option>
+      </select>
+    </div>
     <div class="field">
       <label for="searchBox">搜尋卡牌名稱</label>
       <input type="text" id="searchBox" placeholder="輸入日文或中文名稱關鍵字...">
@@ -249,7 +255,7 @@
       <select id="pageSizeSelect">
         <option value="10" selected>10 張</option>
         <option value="20">20 張</option>
-        <option value="27">全部顯示</option>
+        <option value="9999">全部顯示</option>
       </select>
     </div>
   </div>
@@ -262,6 +268,7 @@
   <table>
     <thead>
       <tr>
+        <th data-sort="set">套組</th>
         <th data-sort="rank" class="active">名次</th>
         <th data-sort="name">卡牌名稱</th>
         <th data-sort="rarity">版本</th>
@@ -280,44 +287,86 @@
 </div>
 
 <script>
+const SETS = {
+  M6: { nameJp: "ストームエメラルダ", nameCn: "綠寶石風暴", code: "M6", releaseDate: "2026-08-07" },
+  M5: { nameJp: "アビスアイ", nameCn: "深淵之瞳", code: "M5", releaseDate: "2026-05-22" },
+};
+
 const CARDS = [
-  {rank:1, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"MUR", number:"113/076", price:160000, img:"img/113-MUR.jpg"},
-  {rank:2, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SAR", number:"110/076", price:65000, img:"img/110-SAR.jpg"},
-  {rank:3, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SAR", number:"108/076", price:8500, img:"img/108-SAR.jpg"},
-  {rank:4, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SR", number:"095/076", price:5800, img:"img/095-SR.jpg"},
-  {rank:5, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SAR", number:"112/076", price:3000, img:"img/112-SAR.jpg"},
-  {rank:6, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SAR", number:"109/076", price:2000, img:"img/109-SAR.jpg"},
-  {rank:7, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"SR", number:"096/076", price:1900, img:"img/096-SR.jpg"},
-  {rank:8, nameJp:"カイオーガ", nameCn:"蓋歐卡", rarity:"AR", number:"080/076", price:1800, img:"img/080-AR.jpg"},
-  {rank:9, nameJp:"グラードン", nameCn:"固拉多", rarity:"AR", number:"084/076", price:1800, img:"img/084-AR.jpg"},
-  {rank:10, nameJp:"カクレオン", nameCn:"變隱龍", rarity:"AR", number:"088/076", price:1800, img:null},
-  {rank:11, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SAR", number:"107/076", price:1700, img:"img/107-SAR.jpg"},
-  {rank:12, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SR", number:"102/076", price:1100, img:null},
-  {rank:13, nameJp:"ギリー", nameCn:"吉利", rarity:"SAR", number:"111/076", price:1100, img:null},
-  {rank:14, nameJp:"ガーディ", nameCn:"卡蒂狗", rarity:"AR", number:"078/076", price:950, img:null},
-  {rank:15, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"RR", number:"062/076", price:850, img:null},
-  {rank:16, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"RR", number:"058/076", price:850, img:null},
-  {rank:17, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SR", number:"092/076", price:600, img:null},
-  {rank:18, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SR", number:"089/076", price:550, img:null},
-  {rank:19, nameJp:"ルリリ", nameCn:"露力麗", rarity:"AR", number:"086/076", price:550, img:null},
-  {rank:20, nameJp:"ぼうけんのランタン", nameCn:"（待核對）", rarity:"SR", number:"097/076", price:550, img:null},
-  {rank:21, nameJp:"MCの盛り上げ", nameCn:"MC的炒熱氣氛", rarity:"SR", number:"100/076", price:500, img:null},
-  {rank:22, nameJp:"メガカラマネロex", nameCn:"（待核對）", rarity:"SR", number:"094/076", price:500, img:null},
-  {rank:23, nameJp:"ヒートロトムex", nameCn:"加熱洛托姆ex", rarity:"SR", number:"090/076", price:500, img:null},
-  {rank:24, nameJp:"ヨワシex", nameCn:"弱丁魚ex", rarity:"SR", number:"091/076", price:500, img:null},
-  {rank:25, nameJp:"フウとランの修行", nameCn:"（待核對）", rarity:"SR", number:"103/076", price:500, img:null},
-  {rank:26, nameJp:"チルタリス", nameCn:"（待核對）", rarity:"AR", number:"087/076", price:500, img:null},
-  {rank:27, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SR", number:"093/076", price:500, img:null},
+  // ===== M6 綠寶石風暴（ストームエメラルダ）=====
+  {set:"M6", rank:1, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"MUR", number:"113/076", price:160000, img:"img/113-MUR.jpg"},
+  {set:"M6", rank:2, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SAR", number:"110/076", price:65000, img:"img/110-SAR.jpg"},
+  {set:"M6", rank:3, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SAR", number:"108/076", price:8500, img:"img/108-SAR.jpg"},
+  {set:"M6", rank:4, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SR", number:"095/076", price:5800, img:"img/095-SR.jpg"},
+  {set:"M6", rank:5, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SAR", number:"112/076", price:3000, img:"img/112-SAR.jpg"},
+  {set:"M6", rank:6, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SAR", number:"109/076", price:2000, img:"img/109-SAR.jpg"},
+  {set:"M6", rank:7, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"SR", number:"096/076", price:1900, img:"img/096-SR.jpg"},
+  {set:"M6", rank:8, nameJp:"カイオーガ", nameCn:"蓋歐卡", rarity:"AR", number:"080/076", price:1800, img:"img/080-AR.jpg"},
+  {set:"M6", rank:9, nameJp:"グラードン", nameCn:"固拉多", rarity:"AR", number:"084/076", price:1800, img:"img/084-AR.jpg"},
+  {set:"M6", rank:10, nameJp:"カクレオン", nameCn:"變隱龍", rarity:"AR", number:"088/076", price:1800, img:null},
+  {set:"M6", rank:11, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SAR", number:"107/076", price:1700, img:"img/107-SAR.jpg"},
+  {set:"M6", rank:12, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SR", number:"102/076", price:1100, img:null},
+  {set:"M6", rank:13, nameJp:"ギリー", nameCn:"吉利", rarity:"SAR", number:"111/076", price:1100, img:null},
+  {set:"M6", rank:14, nameJp:"ガーディ", nameCn:"卡蒂狗", rarity:"AR", number:"078/076", price:950, img:null},
+  {set:"M6", rank:15, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"RR", number:"062/076", price:850, img:null},
+  {set:"M6", rank:16, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"RR", number:"058/076", price:850, img:null},
+  {set:"M6", rank:17, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SR", number:"092/076", price:600, img:null},
+  {set:"M6", rank:18, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SR", number:"089/076", price:550, img:null},
+  {set:"M6", rank:19, nameJp:"ルリリ", nameCn:"露力麗", rarity:"AR", number:"086/076", price:550, img:null},
+  {set:"M6", rank:20, nameJp:"ぼうけんのランタン", nameCn:"（待核對）", rarity:"SR", number:"097/076", price:550, img:null},
+  {set:"M6", rank:21, nameJp:"MCの盛り上げ", nameCn:"MC的炒熱氣氛", rarity:"SR", number:"100/076", price:500, img:null},
+  {set:"M6", rank:22, nameJp:"メガカラマネロex", nameCn:"（待核對）", rarity:"SR", number:"094/076", price:500, img:null},
+  {set:"M6", rank:23, nameJp:"ヒートロトムex", nameCn:"加熱洛托姆ex", rarity:"SR", number:"090/076", price:500, img:null},
+  {set:"M6", rank:24, nameJp:"ヨワシex", nameCn:"弱丁魚ex", rarity:"SR", number:"091/076", price:500, img:null},
+  {set:"M6", rank:25, nameJp:"フウとランの修行", nameCn:"（待核對）", rarity:"SR", number:"103/076", price:500, img:null},
+  {set:"M6", rank:26, nameJp:"チルタリス", nameCn:"（待核對）", rarity:"AR", number:"087/076", price:500, img:null},
+  {set:"M6", rank:27, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SR", number:"093/076", price:500, img:null},
+
+  // ===== M5 深淵之瞳（アビスアイ）=====
+  {set:"M5", rank:1, nameJp:"メガダークライex", nameCn:"超級達克萊伊ex", rarity:"MUR", number:"118/081", price:57000, img:null},
+  {set:"M5", rank:2, nameJp:"メガダークライex", nameCn:"超級達克萊伊ex", rarity:"SAR", number:"114/081", price:30000, img:null},
+  {set:"M5", rank:3, nameJp:"モルペコex", nameCn:"（待核對）", rarity:"SAR", number:"115/081", price:4100, img:null},
+  {set:"M5", rank:4, nameJp:"ムク", nameCn:"（待核對）", rarity:"SAR", number:"117/081", price:4000, img:null},
+  {set:"M5", rank:5, nameJp:"メガゼラオラex", nameCn:"（待核對）", rarity:"SAR", number:"112/081", price:3300, img:null},
+  {set:"M5", rank:6, nameJp:"カスミの元気", nameCn:"（待核對）", rarity:"SR", number:"108/081", price:2400, img:null},
+  {set:"M5", rank:7, nameJp:"メガシャンデラex", nameCn:"（待核對）", rarity:"SAR", number:"113/081", price:2400, img:null},
+  {set:"M5", rank:8, nameJp:"ムク", nameCn:"（待核對）", rarity:"SR", number:"111/081", price:1800, img:null},
+  {set:"M5", rank:9, nameJp:"グラジオの決戦", nameCn:"（待核對）", rarity:"SAR", number:"116/081", price:1400, img:null},
+  {set:"M5", rank:10, nameJp:"メガダークライex", nameCn:"超級達克萊伊ex", rarity:"SR", number:"099/081", price:800, img:null},
+  {set:"M5", rank:11, nameJp:"メガシャンデラex", nameCn:"（待核對）", rarity:"SR", number:"097/081", price:750, img:null},
+  {set:"M5", rank:12, nameJp:"ヤドラン", nameCn:"（待核對）", rarity:"AR", number:"087/081", price:700, img:null},
+  {set:"M5", rank:13, nameJp:"トサキント", nameCn:"（待核對）", rarity:"AR", number:"084/081", price:650, img:null},
+  {set:"M5", rank:14, nameJp:"モルペコex", nameCn:"（待核對）", rarity:"SR", number:"100/081", price:600, img:null},
+  {set:"M5", rank:15, nameJp:"グラジオの決戦", nameCn:"（待核對）", rarity:"SR", number:"109/081", price:600, img:null},
+  {set:"M5", rank:16, nameJp:"ラランテスex", nameCn:"（待核對）", rarity:"SR", number:"094/081", price:500, img:null},
+  {set:"M5", rank:17, nameJp:"ラムパルドex", nameCn:"（待核對）", rarity:"SR", number:"098/081", price:500, img:null},
+  {set:"M5", rank:18, nameJp:"ホエルオーex", nameCn:"（待核對）", rarity:"SR", number:"095/081", price:500, img:null},
+  {set:"M5", rank:19, nameJp:"サビ組のしたっぱ", nameCn:"（待核對）", rarity:"SR", number:"110/081", price:500, img:null},
+  {set:"M5", rank:20, nameJp:"メガドリュウズex", nameCn:"（待核對）", rarity:"SR", number:"101/081", price:500, img:null},
+  {set:"M5", rank:21, nameJp:"メガゼラオラex", nameCn:"（待核對）", rarity:"SR", number:"096/081", price:500, img:null},
+  {set:"M5", rank:22, nameJp:"エネルギーつけかえ", nameCn:"能量轉移", rarity:"SR", number:"103/081", price:500, img:null},
 ];
 
 let state = {
   search: "",
   rarity: "",
+  setFilter: "",
   sortKey: "rank",
   sortDir: "asc",
   page: 1,
   pageSize: 10,
 };
+
+function populateSetFilter() {
+  const select = document.getElementById("setFilter");
+  Object.keys(SETS).forEach(code => {
+    const s = SETS[code];
+    const opt = document.createElement("option");
+    opt.value = code;
+    opt.textContent = `${s.nameCn}（${s.code}）`;
+    select.appendChild(opt);
+  });
+}
 
 function populateRarityFilter() {
   const select = document.getElementById("rarityFilter");
@@ -332,18 +381,31 @@ function populateRarityFilter() {
   });
 }
 
+function updateSubtitle() {
+  const el = document.getElementById("setSubtitle");
+  if (!state.setFilter) {
+    el.textContent = "日版現貨參考價（來源：晴れる屋2 hareruya2.com）・目前收錄：" +
+      Object.values(SETS).map(s => `${s.nameCn}(${s.code})`).join("、");
+  } else {
+    const s = SETS[state.setFilter];
+    el.textContent = `${s.nameJp}／${s.nameCn}（${s.code}，${s.releaseDate} 發售）・日版現貨參考價（來源：晴れる屋2 hareruya2.com）`;
+  }
+}
+
 function getFiltered() {
   let rows = CARDS.filter(c => {
     const q = state.search.trim().toLowerCase();
     const matchesSearch = !q || c.nameJp.toLowerCase().includes(q) || c.nameCn.toLowerCase().includes(q);
     const matchesRarity = !state.rarity || c.rarity === state.rarity;
-    return matchesSearch && matchesRarity;
+    const matchesSet = !state.setFilter || c.set === state.setFilter;
+    return matchesSearch && matchesRarity && matchesSet;
   });
 
   const dir = state.sortDir === "asc" ? 1 : -1;
   rows.sort((a, b) => {
     let av, bv;
     switch (state.sortKey) {
+      case "set": av = a.set; bv = b.set; break;
       case "name": av = a.nameJp; bv = b.nameJp; break;
       case "rarity": av = a.rarity; bv = b.rarity; break;
       case "number": av = a.number; bv = b.number; break;
@@ -379,6 +441,7 @@ function render() {
       ? `<img class="thumb" src="${c.img}" alt="${c.nameJp}" loading="lazy">`
       : `<div class="thumb-placeholder">無圖</div>`;
     tr.innerHTML = `
+      <td class="num" data-label="套組">${SETS[c.set].nameCn}（${c.set}）</td>
       <td class="rank cell-rank" data-label="名次">#${c.rank}</td>
       <td class="cell-name" data-label="卡牌名稱">
         <div class="name-cell">
@@ -421,6 +484,12 @@ function renderPagination(totalPages) {
   wrap.appendChild(mkBtn("下一頁 ›", state.page + 1, { disabled: state.page >= totalPages }));
 }
 
+document.getElementById("setFilter").addEventListener("change", (e) => {
+  state.setFilter = e.target.value;
+  state.page = 1;
+  updateSubtitle();
+  render();
+});
 document.getElementById("searchBox").addEventListener("input", (e) => {
   state.search = e.target.value;
   state.page = 1;
@@ -449,7 +518,9 @@ document.querySelectorAll("thead th").forEach(th => {
   });
 });
 
+populateSetFilter();
 populateRarityFilter();
+updateSubtitle();
 render();
 </script>
 </body>
