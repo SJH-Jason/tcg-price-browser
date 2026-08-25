@@ -267,7 +267,9 @@
       <label for="priceModeSelect">價格顯示</label>
       <select id="priceModeSelect">
         <option value="jpy" selected>日版現貨價（¥）</option>
-        <option value="twd">繁中版掛賣價（NT$）</option>
+        <option value="twd">繁中卡拍拍參考價</option>
+        <option value="jpy-only">只顯示日版價</option>
+        <option value="twd-only">只顯示繁中價</option>
       </select>
     </div>
   </div>
@@ -469,7 +471,7 @@ function getFiltered() {
       case "rarity": av = a.rarity; bv = b.rarity; break;
       case "number": av = a.number; bv = b.number; break;
       case "price":
-        if (state.priceMode === "twd") { av = a.priceTWD ?? -1; bv = b.priceTWD ?? -1; }
+        if (state.priceMode === "twd" || state.priceMode === "twd-only") { av = a.priceTWD ?? -1; bv = b.priceTWD ?? -1; }
         else { av = a.price; bv = b.price; }
         break;
       default: av = a.rank; bv = b.rank;
@@ -503,27 +505,39 @@ function render() {
       ? `<img class="thumb" src="${c.img}" alt="${c.nameJp}" loading="lazy">`
       : `<div class="thumb-placeholder">無圖</div>`;
 
+    const jpyLine = `¥${c.price.toLocaleString()}`;
+    const twdLine = c.priceTWD != null
+      ? `繁中 NT$${c.priceTWD.toLocaleString()}`
+      : `<span class="no-data">尚無繁中版資料</span>`;
+    const updatedLine = `<div class="stock">更新 ${c.updated || "-"}</div>`;
+
     let priceMainHtml;
-    if (state.priceMode === "twd") {
-      if (c.priceTWD != null) {
+    switch (state.priceMode) {
+      case "twd":
         priceMainHtml = `
-          NT$${c.priceTWD.toLocaleString()}
-          <div class="twd-price">繁中版・卡拍拍</div>
-          <div class="jpy-sub">日版 ¥${c.price.toLocaleString()}（晴れる屋2）</div>
-          <div class="stock">更新 ${c.updated || "-"}</div>
+          ${twdLine}
+          <div class="jpy-sub">${jpyLine}</div>
+          ${updatedLine}
         `;
-      } else {
+        break;
+      case "jpy-only":
         priceMainHtml = `
-          <span class="no-data">尚無繁中版資料</span>
-          <div class="jpy-sub">日版 ¥${c.price.toLocaleString()}（晴れる屋2）</div>
+          ${jpyLine}
+          ${updatedLine}
         `;
-      }
-    } else {
-      priceMainHtml = `
-        ¥${c.price.toLocaleString()}
-        ${c.priceTWD != null ? `<div class="twd-price">繁中版 NT$${c.priceTWD.toLocaleString()} 起（卡拍拍）</div>` : ""}
-        <div class="stock">更新 ${c.updated || "-"}</div>
-      `;
+        break;
+      case "twd-only":
+        priceMainHtml = `
+          ${twdLine}
+          ${updatedLine}
+        `;
+        break;
+      default: // "jpy"
+        priceMainHtml = `
+          ${jpyLine}
+          ${c.priceTWD != null ? `<div class="twd-price">${twdLine}</div>` : ""}
+          ${updatedLine}
+        `;
     }
 
     tr.innerHTML = `
@@ -551,7 +565,8 @@ function render() {
 
   const priceHeaderLabel = document.getElementById("priceHeaderLabel");
   if (priceHeaderLabel) {
-    priceHeaderLabel.textContent = state.priceMode === "twd" ? "現貨價 (NT$)" : "現貨價 (¥)";
+    const isTwdMode = state.priceMode === "twd" || state.priceMode === "twd-only";
+    priceHeaderLabel.textContent = isTwdMode ? "現貨價 (NT$)" : "現貨價 (¥)";
   }
 
   document.querySelectorAll("thead th").forEach(th => {
