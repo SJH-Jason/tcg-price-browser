@@ -218,6 +218,7 @@
       margin-bottom: 4px;
     }
     td.price { text-align: right; }
+    .price-block { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
     .pagination { gap: 4px; }
     .pagination button { padding: 6px 10px; font-size: 0.8rem; }
   }
@@ -503,9 +504,11 @@ function render() {
       <td data-label="版本"><span class="rarity-badge rarity-${c.rarity}">${c.rarity}</span></td>
       <td class="num" data-label="卡號">${c.number}</td>
       <td class="price" data-label="現貨價">
-        ¥${c.price.toLocaleString()}
-        ${c.priceTWD != null ? `<div class="twd-price">約 NT$${c.priceTWD.toLocaleString()} 起（卡拍拍）</div>` : ""}
-        <div class="stock">更新 ${c.updated || "-"}</div>
+        <div class="price-block">
+          ¥${c.price.toLocaleString()}
+          ${c.priceTWD != null ? `<div class="twd-price">約 NT$${c.priceTWD.toLocaleString()} 起（卡拍拍）</div>` : ""}
+          <div class="stock">更新 ${c.updated || "-"}</div>
+        </div>
       </td>
     `;
     tbody.appendChild(tr);
