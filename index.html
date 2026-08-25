@@ -117,6 +117,8 @@
   .stock { color: var(--text-dim); font-size: 0.78rem; text-align: right; }
   .stock.sold-out { color: #f87171; font-weight: 600; }
   .twd-price { color: var(--accent); font-size: 0.78rem; text-align: right; font-weight: 600; }
+  .jpy-sub { color: var(--text-dim); font-size: 0.78rem; text-align: right; font-weight: 400; }
+  .no-data { color: var(--text-dim); font-size: 0.85rem; font-weight: 400; font-style: italic; }
 
   .thumb {
     width: 46px;
@@ -261,6 +263,13 @@
         <option value="9999">全部顯示</option>
       </select>
     </div>
+    <div class="field">
+      <label for="priceModeSelect">價格顯示</label>
+      <select id="priceModeSelect">
+        <option value="jpy" selected>日版現貨價（¥）</option>
+        <option value="twd">繁中版掛賣價（NT$）</option>
+      </select>
+    </div>
   </div>
 
   <div class="result-bar">
@@ -276,7 +285,7 @@
         <th data-sort="name">卡牌名稱</th>
         <th data-sort="rarity">版本</th>
         <th data-sort="number">卡號</th>
-        <th data-sort="price">現貨價 (¥)</th>
+        <th data-sort="price" id="priceHeaderLabel">現貨價 (¥)</th>
       </tr>
     </thead>
     <tbody id="tableBody"></tbody>
@@ -404,6 +413,7 @@ let state = {
   sortDir: "asc",
   page: 1,
   pageSize: 10,
+  priceMode: "jpy", // "jpy" | "twd"
 };
 
 function populateSetFilter() {
@@ -458,7 +468,10 @@ function getFiltered() {
       case "name": av = a.nameJp; bv = b.nameJp; break;
       case "rarity": av = a.rarity; bv = b.rarity; break;
       case "number": av = a.number; bv = b.number; break;
-      case "price": av = a.price; bv = b.price; break;
+      case "price":
+        if (state.priceMode === "twd") { av = a.priceTWD ?? -1; bv = b.priceTWD ?? -1; }
+        else { av = a.price; bv = b.price; }
+        break;
       default: av = a.rank; bv = b.rank;
     }
     if (typeof av === "string") return av.localeCompare(bv) * dir;
@@ -489,6 +502,30 @@ function render() {
     const thumbHtml = c.img
       ? `<img class="thumb" src="${c.img}" alt="${c.nameJp}" loading="lazy">`
       : `<div class="thumb-placeholder">無圖</div>`;
+
+    let priceMainHtml;
+    if (state.priceMode === "twd") {
+      if (c.priceTWD != null) {
+        priceMainHtml = `
+          NT$${c.priceTWD.toLocaleString()}
+          <div class="twd-price">繁中版・卡拍拍</div>
+          <div class="jpy-sub">日版 ¥${c.price.toLocaleString()}（晴れる屋2）</div>
+          <div class="stock">更新 ${c.updated || "-"}</div>
+        `;
+      } else {
+        priceMainHtml = `
+          <span class="no-data">尚無繁中版資料</span>
+          <div class="jpy-sub">日版 ¥${c.price.toLocaleString()}（晴れる屋2）</div>
+        `;
+      }
+    } else {
+      priceMainHtml = `
+        ¥${c.price.toLocaleString()}
+        ${c.priceTWD != null ? `<div class="twd-price">繁中版 NT$${c.priceTWD.toLocaleString()} 起（卡拍拍）</div>` : ""}
+        <div class="stock">更新 ${c.updated || "-"}</div>
+      `;
+    }
+
     tr.innerHTML = `
       <td class="num" data-label="套組">${SETS[c.set].nameCn}（${c.set}）</td>
       <td class="rank cell-rank" data-label="名次">#${c.rank}</td>
@@ -505,14 +542,17 @@ function render() {
       <td class="num" data-label="卡號">${c.number}</td>
       <td class="price" data-label="現貨價">
         <div class="price-block">
-          ¥${c.price.toLocaleString()}
-          ${c.priceTWD != null ? `<div class="twd-price">繁中版 NT$${c.priceTWD.toLocaleString()} 起（卡拍拍）</div>` : ""}
-          <div class="stock">更新 ${c.updated || "-"}</div>
+          ${priceMainHtml}
         </div>
       </td>
     `;
     tbody.appendChild(tr);
   });
+
+  const priceHeaderLabel = document.getElementById("priceHeaderLabel");
+  if (priceHeaderLabel) {
+    priceHeaderLabel.textContent = state.priceMode === "twd" ? "現貨價 (NT$)" : "現貨價 (¥)";
+  }
 
   document.querySelectorAll("thead th").forEach(th => {
     th.classList.toggle("active", th.dataset.sort === state.sortKey);
@@ -558,6 +598,10 @@ document.getElementById("rarityFilter").addEventListener("change", (e) => {
 document.getElementById("pageSizeSelect").addEventListener("change", (e) => {
   state.pageSize = parseInt(e.target.value, 10);
   state.page = 1;
+  render();
+});
+document.getElementById("priceModeSelect").addEventListener("change", (e) => {
+  state.priceMode = e.target.value;
   render();
 });
 document.querySelectorAll("thead th").forEach(th => {
