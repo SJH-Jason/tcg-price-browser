@@ -116,6 +116,7 @@
   .price { font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
   .stock { color: var(--text-dim); font-size: 0.78rem; text-align: right; }
   .stock.sold-out { color: #f87171; font-weight: 600; }
+  .twd-price { color: var(--accent); font-size: 0.78rem; text-align: right; font-weight: 600; }
 
   .thumb {
     width: 46px;
@@ -230,6 +231,7 @@
     <div class="meta-note">
       資料抓取時間：2026-08-15 下午・<strong>收錄門檻：日圓現貨價 ¥500 以上才選入</strong>（低於此價位多為大量印製的量產卡，價格幾乎同一水位、參考意義低，不逐一收錄）。
       日圓現貨掛牌價，非成交歷史；隨時間會變動，重要決策前建議回頭核對即時價格。中文譯名已逐一核對官方繁中站（asia.pokemon-card.com）。卡圖來源 Serebii.net（版權屬 Nintendo/The Pokémon Company，僅供個人參考）。
+      <strong>台幣參考價</strong>（M4~M6，2026-08-25起）來源：卡拍拍（trade.kapaipai.tw）該卡目前最低掛賣價，非官方定價、非成交均價，僅供粗略比對日圓/台幣行情落差參考。
     </div>
   </header>
 
@@ -296,76 +298,76 @@ const SETS = {
 
 const CARDS = [
   // ===== M6 綠寶石風暴（ストームエメラルダ）=====
-  {set:"M6", rank:1, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"MUR", number:"113/076", price:150000, img:"img/113-MUR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:2, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SAR", number:"110/076", price:65000, img:"img/110-SAR.jpg", updated:"2026-08-15"},
-  {set:"M6", rank:3, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SAR", number:"108/076", price:7500, img:"img/108-SAR.jpg", updated:"2026-08-25"},
-  {set:"M6", rank:4, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SR", number:"095/076", price:4800, img:"img/095-SR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:5, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SAR", number:"112/076", price:3000, img:"img/112-SAR.jpg", updated:"2026-08-15"},
-  {set:"M6", rank:6, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SAR", number:"109/076", price:1800, img:"img/109-SAR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:7, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"SR", number:"096/076", price:2000, img:"img/096-SR.jpg", updated:"2026-08-25"},
-  {set:"M6", rank:8, nameJp:"カイオーガ", nameCn:"蓋歐卡", rarity:"AR", number:"080/076", price:1600, img:"img/080-AR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:9, nameJp:"グラードン", nameCn:"固拉多", rarity:"AR", number:"084/076", price:1700, img:"img/084-AR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:10, nameJp:"カクレオン", nameCn:"變隱龍", rarity:"AR", number:"088/076", price:1400, img:"img/M6-088-10-AR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:11, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SAR", number:"107/076", price:1400, img:"img/107-SAR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:12, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SR", number:"102/076", price:950, img:"img/M6-102-12-SR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:13, nameJp:"ギリー", nameCn:"吉利", rarity:"SAR", number:"111/076", price:1000, img:"img/M6-111-13-SAR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:14, nameJp:"ガーディ", nameCn:"卡蒂狗", rarity:"AR", number:"078/076", price:800, img:"img/M6-078-14-AR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:15, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"RR", number:"062/076", price:900, img:"img/M6-062-15-RR.jpg", updated:"2026-08-25"},
-  {set:"M6", rank:16, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"RR", number:"058/076", price:550, img:"img/M6-058-16-RR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:17, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SR", number:"092/076", price:700, img:"img/M6-092-17-SR.jpg", updated:"2026-08-25"},
-  {set:"M6", rank:18, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SR", number:"089/076", price:650, img:"img/M6-089-18-SR.jpg", updated:"2026-08-25"},
-  {set:"M6", rank:19, nameJp:"ルリリ", nameCn:"露力麗", rarity:"AR", number:"086/076", price:500, img:"img/M6-086-19-AR.jpg", updated:"2026-08-25"},
-  {set:"M6", rank:20, nameJp:"ぼうけんのランタン", nameCn:"冒險提燈", rarity:"SR", number:"097/076", price:450, img:"img/M6-097-20-SR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:21, nameJp:"MCの盛り上げ", nameCn:"MC的炒熱氣氛", rarity:"SR", number:"100/076", price:650, img:"img/M6-100-21-SR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:22, nameJp:"メガカラマネロex", nameCn:"超級烏賊王ex", rarity:"SR", number:"094/076", price:650, img:"img/M6-094-22-SR.jpg", updated:"2026-08-25"},
-  {set:"M6", rank:23, nameJp:"ヒートロトムex", nameCn:"加熱洛托姆ex", rarity:"SR", number:"090/076", price:600, img:"img/M6-090-23-SR.jpg", updated:"2026-08-25"},
-  {set:"M6", rank:24, nameJp:"ヨワシex", nameCn:"弱丁魚ex", rarity:"SR", number:"091/076", price:650, img:"img/M6-091-24-SR.jpg", updated:"2026-08-25"},
-  {set:"M6", rank:25, nameJp:"フウとランの修行", nameCn:"小楓與小南的修行", rarity:"SR", number:"103/076", price:650, img:"img/M6-103-25-SR.jpg", updated:"2026-08-22"},
-  {set:"M6", rank:26, nameJp:"チルタリス", nameCn:"七夕青鳥", rarity:"AR", number:"087/076", price:500, img:"img/M6-087-26-AR.jpg", updated:"2026-08-25"},
-  {set:"M6", rank:27, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SR", number:"093/076", price:650, img:"img/M6-093-27-SR.jpg", updated:"2026-08-25"},
+  {set:"M6", rank:1, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"MUR", number:"113/076", price:150000,priceTWD:6950, img:"img/113-MUR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:2, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SAR", number:"110/076", price:65000,priceTWD:4000, img:"img/110-SAR.jpg", updated:"2026-08-15"},
+  {set:"M6", rank:3, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SAR", number:"108/076", price:7500,priceTWD:400, img:"img/108-SAR.jpg", updated:"2026-08-25"},
+  {set:"M6", rank:4, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"SR", number:"095/076", price:4800,priceTWD:515, img:"img/095-SR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:5, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SAR", number:"112/076", price:3000,priceTWD:350, img:"img/112-SAR.jpg", updated:"2026-08-15"},
+  {set:"M6", rank:6, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SAR", number:"109/076", price:1800,priceTWD:120, img:"img/109-SAR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:7, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"SR", number:"096/076", price:2000,priceTWD:240, img:"img/096-SR.jpg", updated:"2026-08-25"},
+  {set:"M6", rank:8, nameJp:"カイオーガ", nameCn:"蓋歐卡", rarity:"AR", number:"080/076", price:1600,priceTWD:55, img:"img/080-AR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:9, nameJp:"グラードン", nameCn:"固拉多", rarity:"AR", number:"084/076", price:1700,priceTWD:60, img:"img/084-AR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:10, nameJp:"カクレオン", nameCn:"變隱龍", rarity:"AR", number:"088/076", price:1400,priceTWD:20, img:"img/M6-088-10-AR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:11, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SAR", number:"107/076", price:1400,priceTWD:150, img:"img/107-SAR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:12, nameJp:"ヒガナの信頼", nameCn:"希嘉娜的信賴", rarity:"SR", number:"102/076", price:950,priceTWD:130, img:"img/M6-102-12-SR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:13, nameJp:"ギリー", nameCn:"吉利", rarity:"SAR", number:"111/076", price:1000,priceTWD:195, img:"img/M6-111-13-SAR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:14, nameJp:"ガーディ", nameCn:"卡蒂狗", rarity:"AR", number:"078/076", price:800,priceTWD:8, img:"img/M6-078-14-AR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:15, nameJp:"ファイアローex", nameCn:"烈箭鷹ex", rarity:"RR", number:"062/076", price:900,priceTWD:20, img:"img/M6-062-15-RR.jpg", updated:"2026-08-25"},
+  {set:"M6", rank:16, nameJp:"メガレックウザex", nameCn:"超級烈空坐ex", rarity:"RR", number:"058/076", price:550,priceTWD:60, img:"img/M6-058-16-RR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:17, nameJp:"ライコウex", nameCn:"雷公ex", rarity:"SR", number:"092/076", price:700,priceTWD:45, img:"img/M6-092-17-SR.jpg", updated:"2026-08-25"},
+  {set:"M6", rank:18, nameJp:"メガグソクムシャex", nameCn:"超級具甲武者ex", rarity:"SR", number:"089/076", price:650,priceTWD:30, img:"img/M6-089-18-SR.jpg", updated:"2026-08-25"},
+  {set:"M6", rank:19, nameJp:"ルリリ", nameCn:"露力麗", rarity:"AR", number:"086/076", price:500,priceTWD:10, img:"img/M6-086-19-AR.jpg", updated:"2026-08-25"},
+  {set:"M6", rank:20, nameJp:"ぼうけんのランタン", nameCn:"冒險提燈", rarity:"SR", number:"097/076", price:450,priceTWD:30, img:"img/M6-097-20-SR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:21, nameJp:"MCの盛り上げ", nameCn:"MC的炒熱氣氛", rarity:"SR", number:"100/076", price:650,priceTWD:45, img:"img/M6-100-21-SR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:22, nameJp:"メガカラマネロex", nameCn:"超級烏賊王ex", rarity:"SR", number:"094/076", price:650,priceTWD:28, img:"img/M6-094-22-SR.jpg", updated:"2026-08-25"},
+  {set:"M6", rank:23, nameJp:"ヒートロトムex", nameCn:"加熱洛托姆ex", rarity:"SR", number:"090/076", price:600,priceTWD:20, img:"img/M6-090-23-SR.jpg", updated:"2026-08-25"},
+  {set:"M6", rank:24, nameJp:"ヨワシex", nameCn:"弱丁魚ex", rarity:"SR", number:"091/076", price:650,priceTWD:9, img:"img/M6-091-24-SR.jpg", updated:"2026-08-25"},
+  {set:"M6", rank:25, nameJp:"フウとランの修行", nameCn:"小楓與小南的修行", rarity:"SR", number:"103/076", price:650,priceTWD:30, img:"img/M6-103-25-SR.jpg", updated:"2026-08-22"},
+  {set:"M6", rank:26, nameJp:"チルタリス", nameCn:"七夕青鳥", rarity:"AR", number:"087/076", price:500,priceTWD:5, img:"img/M6-087-26-AR.jpg", updated:"2026-08-25"},
+  {set:"M6", rank:27, nameJp:"メガゴルーグex", nameCn:"超級泥偶巨人ex", rarity:"SR", number:"093/076", price:650,priceTWD:20, img:"img/M6-093-27-SR.jpg", updated:"2026-08-25"},
 
   // ===== M5 深淵之瞳（アビスアイ）=====
-  {set:"M5", rank:1, nameJp:"メガダークライex", nameCn:"超級達克萊伊ex", rarity:"MUR", number:"118/081", price:54000, img:"img/M5-118-1-MUR.jpg", updated:"2026-08-22"},
-  {set:"M5", rank:2, nameJp:"メガダークライex", nameCn:"超級達克萊伊ex", rarity:"SAR", number:"114/081", price:24000, img:"img/M5-114-2-SAR.jpg", updated:"2026-08-25"},
-  {set:"M5", rank:3, nameJp:"モルペコex", nameCn:"莫魯貝可ex", rarity:"SAR", number:"115/081", price:3480, img:"img/M5-115-3-SAR.jpg", updated:"2026-08-25"},
-  {set:"M5", rank:4, nameJp:"ムク", nameCn:"沐淨", rarity:"SAR", number:"117/081", price:3800, img:"img/M5-117-4-SAR.jpg", updated:"2026-08-22"},
-  {set:"M5", rank:5, nameJp:"メガゼラオラex", nameCn:"超級捷拉奧拉ex", rarity:"SAR", number:"112/081", price:3500, img:"img/M5-112-5-SAR.jpg", updated:"2026-08-25"},
-  {set:"M5", rank:6, nameJp:"カスミの元気", nameCn:"小霞的朝氣", rarity:"SR", number:"108/081", price:2200, img:"img/M5-108-6-SR.jpg", updated:"2026-08-25"},
-  {set:"M5", rank:7, nameJp:"メガシャンデラex", nameCn:"超級水晶燈火靈ex", rarity:"SAR", number:"113/081", price:2200, img:"img/M5-113-7-SAR.jpg", updated:"2026-08-22"},
-  {set:"M5", rank:8, nameJp:"ムク", nameCn:"沐淨", rarity:"SR", number:"111/081", price:1600, img:"img/M5-111-8-SR.jpg", updated:"2026-08-25"},
-  {set:"M5", rank:9, nameJp:"グラジオの決戦", nameCn:"格拉吉歐的決戰", rarity:"SAR", number:"116/081", price:1200, img:"img/M5-116-9-SAR.jpg", updated:"2026-08-25"},
-  {set:"M5", rank:10, nameJp:"メガダークライex", nameCn:"超級達克萊伊ex", rarity:"SR", number:"099/081", price:700, img:"img/M5-099-10-SR.jpg", updated:"2026-08-25"},
-  {set:"M5", rank:11, nameJp:"メガシャンデラex", nameCn:"超級水晶燈火靈ex", rarity:"SR", number:"097/081", price:480, img:"img/M5-097-11-SR.jpg", updated:"2026-08-25"},
-  {set:"M5", rank:12, nameJp:"ヤドラン", nameCn:"呆殼獸", rarity:"AR", number:"087/081", price:800, img:"img/M5-087-12-AR.jpg", updated:"2026-08-25"},
-  {set:"M5", rank:13, nameJp:"トサキント", nameCn:"角金魚", rarity:"AR", number:"084/081", price:650, img:"img/M5-084-13-AR.jpg", updated:"2026-08-15"},
-  {set:"M5", rank:14, nameJp:"モルペコex", nameCn:"莫魯貝可ex", rarity:"SR", number:"100/081", price:550, img:"img/M5-100-14-SR.jpg", updated:"2026-08-22"},
-  {set:"M5", rank:15, nameJp:"グラジオの決戦", nameCn:"格拉吉歐的決戰", rarity:"SR", number:"109/081", price:500, img:"img/M5-109-15-SR.jpg", updated:"2026-08-22"},
-  {set:"M5", rank:16, nameJp:"ラランテスex", nameCn:"蘭螳花ex", rarity:"SR", number:"094/081", price:380, img:"img/M5-094-16-SR.jpg", updated:"2026-08-25"},
-  {set:"M5", rank:17, nameJp:"ラムパルドex", nameCn:"戰槌龍ex", rarity:"SR", number:"098/081", price:380, img:"img/M5-098-17-SR.jpg", updated:"2026-08-25"},
-  {set:"M5", rank:18, nameJp:"ホエルオーex", nameCn:"吼鯨王ex", rarity:"SR", number:"095/081", price:500, img:"img/M5-095-18-SR.jpg", updated:"2026-08-15"},
-  {set:"M5", rank:19, nameJp:"サビ組のしたっぱ", nameCn:"鏽蝕組手下", rarity:"SR", number:"110/081", price:500, img:"img/M5-110-19-SR.jpg", updated:"2026-08-15"},
-  {set:"M5", rank:20, nameJp:"メガドリュウズex", nameCn:"超級龍頭地鼠ex", rarity:"SR", number:"101/081", price:500, img:"img/M5-101-20-SR.jpg", updated:"2026-08-15"},
-  {set:"M5", rank:21, nameJp:"メガゼラオラex", nameCn:"超級捷拉奧拉ex", rarity:"SR", number:"096/081", price:600, img:"img/M5-096-21-SR.jpg", updated:"2026-08-22"},
-  {set:"M5", rank:22, nameJp:"エネルギーつけかえ", nameCn:"能量轉移", rarity:"SR", number:"103/081", price:700, img:"img/M5-103-22-SR.jpg", updated:"2026-08-22"},
+  {set:"M5", rank:1, nameJp:"メガダークライex", nameCn:"超級達克萊伊ex", rarity:"MUR", number:"118/081", price:54000,priceTWD:3000, img:"img/M5-118-1-MUR.jpg", updated:"2026-08-22"},
+  {set:"M5", rank:2, nameJp:"メガダークライex", nameCn:"超級達克萊伊ex", rarity:"SAR", number:"114/081", price:24000,priceTWD:1913, img:"img/M5-114-2-SAR.jpg", updated:"2026-08-25"},
+  {set:"M5", rank:3, nameJp:"モルペコex", nameCn:"莫魯貝可ex", rarity:"SAR", number:"115/081", price:3480,priceTWD:350, img:"img/M5-115-3-SAR.jpg", updated:"2026-08-25"},
+  {set:"M5", rank:4, nameJp:"ムク", nameCn:"沐淨", rarity:"SAR", number:"117/081", price:3800,priceTWD:700, img:"img/M5-117-4-SAR.jpg", updated:"2026-08-22"},
+  {set:"M5", rank:5, nameJp:"メガゼラオラex", nameCn:"超級捷拉奧拉ex", rarity:"SAR", number:"112/081", price:3500,priceTWD:330, img:"img/M5-112-5-SAR.jpg", updated:"2026-08-25"},
+  {set:"M5", rank:6, nameJp:"カスミの元気", nameCn:"小霞的朝氣", rarity:"SR", number:"108/081", price:2200,priceTWD:245, img:"img/M5-108-6-SR.jpg", updated:"2026-08-25"},
+  {set:"M5", rank:7, nameJp:"メガシャンデラex", nameCn:"超級水晶燈火靈ex", rarity:"SAR", number:"113/081", price:2200,priceTWD:200, img:"img/M5-113-7-SAR.jpg", updated:"2026-08-22"},
+  {set:"M5", rank:8, nameJp:"ムク", nameCn:"沐淨", rarity:"SR", number:"111/081", price:1600,priceTWD:490, img:"img/M5-111-8-SR.jpg", updated:"2026-08-25"},
+  {set:"M5", rank:9, nameJp:"グラジオの決戦", nameCn:"格拉吉歐的決戰", rarity:"SAR", number:"116/081", price:1200,priceTWD:210, img:"img/M5-116-9-SAR.jpg", updated:"2026-08-25"},
+  {set:"M5", rank:10, nameJp:"メガダークライex", nameCn:"超級達克萊伊ex", rarity:"SR", number:"099/081", price:700,priceTWD:110, img:"img/M5-099-10-SR.jpg", updated:"2026-08-25"},
+  {set:"M5", rank:11, nameJp:"メガシャンデラex", nameCn:"超級水晶燈火靈ex", rarity:"SR", number:"097/081", price:480,priceTWD:40, img:"img/M5-097-11-SR.jpg", updated:"2026-08-25"},
+  {set:"M5", rank:12, nameJp:"ヤドラン", nameCn:"呆殼獸", rarity:"AR", number:"087/081", price:800,priceTWD:32, img:"img/M5-087-12-AR.jpg", updated:"2026-08-25"},
+  {set:"M5", rank:13, nameJp:"トサキント", nameCn:"角金魚", rarity:"AR", number:"084/081", price:650,priceTWD:5, img:"img/M5-084-13-AR.jpg", updated:"2026-08-15"},
+  {set:"M5", rank:14, nameJp:"モルペコex", nameCn:"莫魯貝可ex", rarity:"SR", number:"100/081", price:550,priceTWD:40, img:"img/M5-100-14-SR.jpg", updated:"2026-08-22"},
+  {set:"M5", rank:15, nameJp:"グラジオの決戦", nameCn:"格拉吉歐的決戰", rarity:"SR", number:"109/081", price:500,priceTWD:70, img:"img/M5-109-15-SR.jpg", updated:"2026-08-22"},
+  {set:"M5", rank:16, nameJp:"ラランテスex", nameCn:"蘭螳花ex", rarity:"SR", number:"094/081", price:380,priceTWD:30, img:"img/M5-094-16-SR.jpg", updated:"2026-08-25"},
+  {set:"M5", rank:17, nameJp:"ラムパルドex", nameCn:"戰槌龍ex", rarity:"SR", number:"098/081", price:380,priceTWD:25, img:"img/M5-098-17-SR.jpg", updated:"2026-08-25"},
+  {set:"M5", rank:18, nameJp:"ホエルオーex", nameCn:"吼鯨王ex", rarity:"SR", number:"095/081", price:500,priceTWD:15, img:"img/M5-095-18-SR.jpg", updated:"2026-08-15"},
+  {set:"M5", rank:19, nameJp:"サビ組のしたっぱ", nameCn:"鏽蝕組手下", rarity:"SR", number:"110/081", price:500,priceTWD:35, img:"img/M5-110-19-SR.jpg", updated:"2026-08-15"},
+  {set:"M5", rank:20, nameJp:"メガドリュウズex", nameCn:"超級龍頭地鼠ex", rarity:"SR", number:"101/081", price:500,priceTWD:100, img:"img/M5-101-20-SR.jpg", updated:"2026-08-15"},
+  {set:"M5", rank:21, nameJp:"メガゼラオラex", nameCn:"超級捷拉奧拉ex", rarity:"SR", number:"096/081", price:600,priceTWD:50, img:"img/M5-096-21-SR.jpg", updated:"2026-08-22"},
+  {set:"M5", rank:22, nameJp:"エネルギーつけかえ", nameCn:"能量轉移", rarity:"SR", number:"103/081", price:700,priceTWD:99, img:"img/M5-103-22-SR.jpg", updated:"2026-08-22"},
 
   // ===== M4 忍者飛旋（ニンジャスピナー）=====
-  {set:"M4", rank:1, nameJp:"メガゲッコウガex", nameCn:"超級甲賀忍蛙ex", rarity:"MUR", number:"120/083", price:73000, img:"img/M4-120-1-MUR.jpg", updated:"2026-08-25"},
-  {set:"M4", rank:2, nameJp:"メガゲッコウガex", nameCn:"超級甲賀忍蛙ex", rarity:"SAR", number:"114/083", price:27000, img:"img/M4-114-2-SAR.jpg", updated:"2026-08-22"},
-  {set:"M4", rank:3, nameJp:"チラチーノex", nameCn:"奇諾栗鼠ex", rarity:"SAR", number:"117/083", price:3480, img:"img/M4-117-3-SAR.jpg", updated:"2026-08-25"},
-  {set:"M4", rank:4, nameJp:"メガドラミドロex", nameCn:"超級毒藻龍ex", rarity:"SAR", number:"116/083", price:1900, img:"img/M4-116-4-SAR.jpg", updated:"2026-08-25"},
-  {set:"M4", rank:5, nameJp:"メガゲッコウガex", nameCn:"超級甲賀忍蛙ex", rarity:"SR", number:"098/083", price:1800, img:"img/M4-098-5-SR.jpg", updated:"2026-08-25"},
-  {set:"M4", rank:6, nameJp:"メガフラエッテex", nameCn:"超級花葉蒂ex", rarity:"SAR", number:"115/083", price:1300, img:"img/M4-115-6-SAR.jpg", updated:"2026-08-22"},
-  {set:"M4", rank:7, nameJp:"AZの安らぎ", nameCn:"AZ的平和", rarity:"SAR", number:"118/083", price:1200, img:"img/M4-118-7-SAR.jpg", updated:"2026-08-22"},
-  {set:"M4", rank:8, nameJp:"ホミカの演奏", nameCn:"霍米加的演奏", rarity:"SAR", number:"119/083", price:1200, img:"img/M4-119-8-SAR.jpg", updated:"2026-08-25"},
-  {set:"M4", rank:9, nameJp:"メガカエンジシex", nameCn:"超級火炎獅ex", rarity:"SR", number:"097/083", price:380, img:"img/M4-097-9-SR.jpg", updated:"2026-08-25"},
-  {set:"M4", rank:10, nameJp:"スピアーex", nameCn:"大針蜂ex", rarity:"SR", number:"096/083", price:380, img:"img/M4-096-10-SR.jpg", updated:"2026-08-25"},
-  {set:"M4", rank:11, nameJp:"パンプジンex", nameCn:"南瓜怪人ex", rarity:"SR", number:"100/083", price:380, img:"img/M4-100-11-SR.jpg", updated:"2026-08-25"},
-  {set:"M4", rank:12, nameJp:"メガフラエッテex", nameCn:"超級花葉蒂ex", rarity:"SR", number:"099/083", price:500, img:"img/M4-099-12-SR.jpg", updated:"2026-08-15"},
-  {set:"M4", rank:13, nameJp:"ゼルネアス", nameCn:"哲爾尼亞斯", rarity:"AR", number:"089/083", price:500, img:"img/M4-089-13-AR.jpg", updated:"2026-08-25"},
-  {set:"M4", rank:14, nameJp:"ケロマツ", nameCn:"呱呱泡蛙", rarity:"AR", number:"086/083", price:500, img:"img/M4-086-14-AR.jpg", updated:"2026-08-15"},
-  {set:"M4", rank:15, nameJp:"マチエール", nameCn:"瑪琪艾兒", rarity:"SR", number:"111/083", price:500, img:"img/M4-111-15-SR.jpg", updated:"2026-08-15"},
-  {set:"M4", rank:16, nameJp:"ホミカの演奏", nameCn:"霍米加的演奏", rarity:"SR", number:"110/083", price:380, img:"img/M4-110-16-SR.jpg", updated:"2026-08-25"},
-  {set:"M4", rank:17, nameJp:"ジプソ", nameCn:"吉普索", rarity:"SR", number:"109/083", price:500, img:"img/M4-109-17-SR.jpg", updated:"2026-08-15"},
+  {set:"M4", rank:1, nameJp:"メガゲッコウガex", nameCn:"超級甲賀忍蛙ex", rarity:"MUR", number:"120/083", price:73000,priceTWD:3950, img:"img/M4-120-1-MUR.jpg", updated:"2026-08-25"},
+  {set:"M4", rank:2, nameJp:"メガゲッコウガex", nameCn:"超級甲賀忍蛙ex", rarity:"SAR", number:"114/083", price:27000,priceTWD:2000, img:"img/M4-114-2-SAR.jpg", updated:"2026-08-22"},
+  {set:"M4", rank:3, nameJp:"チラチーノex", nameCn:"奇諾栗鼠ex", rarity:"SAR", number:"117/083", price:3480,priceTWD:390, img:"img/M4-117-3-SAR.jpg", updated:"2026-08-25"},
+  {set:"M4", rank:4, nameJp:"メガドラミドロex", nameCn:"超級毒藻龍ex", rarity:"SAR", number:"116/083", price:1900,priceTWD:180, img:"img/M4-116-4-SAR.jpg", updated:"2026-08-25"},
+  {set:"M4", rank:5, nameJp:"メガゲッコウガex", nameCn:"超級甲賀忍蛙ex", rarity:"SR", number:"098/083", price:1800,priceTWD:200, img:"img/M4-098-5-SR.jpg", updated:"2026-08-25"},
+  {set:"M4", rank:6, nameJp:"メガフラエッテex", nameCn:"超級花葉蒂ex", rarity:"SAR", number:"115/083", price:1300,priceTWD:120, img:"img/M4-115-6-SAR.jpg", updated:"2026-08-22"},
+  {set:"M4", rank:7, nameJp:"AZの安らぎ", nameCn:"AZ的平和", rarity:"SAR", number:"118/083", price:1200,priceTWD:100, img:"img/M4-118-7-SAR.jpg", updated:"2026-08-22"},
+  {set:"M4", rank:8, nameJp:"ホミカの演奏", nameCn:"霍米加的演奏", rarity:"SAR", number:"119/083", price:1200,priceTWD:99, img:"img/M4-119-8-SAR.jpg", updated:"2026-08-25"},
+  {set:"M4", rank:9, nameJp:"メガカエンジシex", nameCn:"超級火炎獅ex", rarity:"SR", number:"097/083", price:380,priceTWD:20, img:"img/M4-097-9-SR.jpg", updated:"2026-08-25"},
+  {set:"M4", rank:10, nameJp:"スピアーex", nameCn:"大針蜂ex", rarity:"SR", number:"096/083", price:380,priceTWD:50, img:"img/M4-096-10-SR.jpg", updated:"2026-08-25"},
+  {set:"M4", rank:11, nameJp:"パンプジンex", nameCn:"南瓜怪人ex", rarity:"SR", number:"100/083", price:380,priceTWD:10, img:"img/M4-100-11-SR.jpg", updated:"2026-08-25"},
+  {set:"M4", rank:12, nameJp:"メガフラエッテex", nameCn:"超級花葉蒂ex", rarity:"SR", number:"099/083", price:500,priceTWD:19, img:"img/M4-099-12-SR.jpg", updated:"2026-08-15"},
+  {set:"M4", rank:13, nameJp:"ゼルネアス", nameCn:"哲爾尼亞斯", rarity:"AR", number:"089/083", price:500,priceTWD:5, img:"img/M4-089-13-AR.jpg", updated:"2026-08-25"},
+  {set:"M4", rank:14, nameJp:"ケロマツ", nameCn:"呱呱泡蛙", rarity:"AR", number:"086/083", price:500,priceTWD:40, img:"img/M4-086-14-AR.jpg", updated:"2026-08-15"},
+  {set:"M4", rank:15, nameJp:"マチエール", nameCn:"瑪琪艾兒", rarity:"SR", number:"111/083", price:500,priceTWD:35, img:"img/M4-111-15-SR.jpg", updated:"2026-08-15"},
+  {set:"M4", rank:16, nameJp:"ホミカの演奏", nameCn:"霍米加的演奏", rarity:"SR", number:"110/083", price:380,priceTWD:50, img:"img/M4-110-16-SR.jpg", updated:"2026-08-25"},
+  {set:"M4", rank:17, nameJp:"ジプソ", nameCn:"吉普索", rarity:"SR", number:"109/083", price:500,priceTWD:45, img:"img/M4-109-17-SR.jpg", updated:"2026-08-15"},
 
   // ===== M3 虛無歸零（ムニキスゼロ）=====
   {set:"M3", rank:1, nameJp:"メガジガルデex", nameCn:"超級基格爾德ex", rarity:"MUR", number:"117/080", price:27000, img:"img/M3-117-1-MUR.jpg", updated:"2026-08-16"},
@@ -502,6 +504,7 @@ function render() {
       <td class="num" data-label="卡號">${c.number}</td>
       <td class="price" data-label="現貨價">
         ¥${c.price.toLocaleString()}
+        ${c.priceTWD != null ? `<div class="twd-price">約 NT$${c.priceTWD.toLocaleString()} 起（卡拍拍）</div>` : ""}
         <div class="stock">更新 ${c.updated || "-"}</div>
       </td>
     `;
