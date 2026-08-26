@@ -40,6 +40,15 @@
     margin-top: 12px;
     line-height: 1.6;
   }
+  .meta-details { margin-top: 8px; }
+  .meta-details summary {
+    cursor: pointer;
+    color: var(--accent);
+    font-weight: 600;
+    outline: none;
+  }
+  .meta-details summary:hover { text-decoration: underline; }
+  .meta-details p { margin: 8px 0 0; }
 
   .controls {
     display: flex;
@@ -232,9 +241,12 @@
     <h1>💎 MEGA 系列卡價查詢</h1>
     <div class="subtitle" id="setSubtitle">日版現貨參考價（來源：晴れる屋2 hareruya2.com）</div>
     <div class="meta-note">
-      資料抓取時間：2026-08-15 下午・<strong>收錄門檻：日圓現貨價 ¥500 以上才選入</strong>（低於此價位多為大量印製的量產卡，價格幾乎同一水位、參考意義低，不逐一收錄）。
-      日圓現貨掛牌價，非成交歷史；隨時間會變動，重要決策前建議回頭核對即時價格。中文譯名已逐一核對官方繁中站（asia.pokemon-card.com）。卡圖來源 Serebii.net（版權屬 Nintendo/The Pokémon Company，僅供個人參考）。
-      <strong>台幣參考價（標示「繁中版」）</strong>（M4~M6，2026-08-25起）來源：卡拍拍（trade.kapaipai.tw）該卡目前最低掛賣價，⚠️<strong>是繁體中文版卡片的價格，跟上方日圓價（日版卡）是不同印刷版本、不同市場</strong>，非官方定價、非成交均價，僅供粗略參考、不代表同一張卡跨市場比價。
+      <strong>收錄門檻：日圓現貨價 ¥500 以上才選入</strong>。價格為掛牌價、非成交歷史，會隨時間變動，各卡實際確認時間請看卡片下方「更新」日期。
+      <details class="meta-details">
+        <summary>資料來源與說明（點開看更多）</summary>
+        <p>低於 ¥500 門檻的多為大量印製的量產卡，價格幾乎同一水位、參考意義低，不逐一收錄。中文譯名已逐一核對官方繁中站（asia.pokemon-card.com）。卡圖來源 Serebii.net（版權屬 Nintendo/The Pokémon Company，僅供個人參考）。</p>
+        <p><strong>台幣參考價（標示「繁中版」）</strong>（M2、M4~M6，2026-08-25起）來源：卡拍拍（trade.kapaipai.tw）該卡目前最低掛賣價，⚠️<strong>是繁體中文版卡片的價格，跟上方日圓價（日版卡）是不同印刷版本、不同市場</strong>，非官方定價、非成交均價，僅供粗略參考、不代表同一張卡跨市場比價。</p>
+      </details>
     </div>
   </header>
 
