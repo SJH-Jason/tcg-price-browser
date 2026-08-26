@@ -290,7 +290,8 @@
       <details class="meta-details">
         <summary>資料來源與說明（點開看更多）</summary>
         <p>低於 ¥500 門檻的多為大量印製的量產卡，價格幾乎同一水位、參考意義低，不逐一收錄。中文譯名已逐一核對官方繁中站（asia.pokemon-card.com）。卡圖來源 Serebii.net（版權屬 Nintendo/The Pokémon Company，僅供個人參考）。</p>
-        <p><strong>台幣參考價（標示「繁中版」）</strong>（M1L、M1S、M2、M4~M6，2026-08-25起）來源：卡拍拍（trade.kapaipai.tw）該卡目前最低掛賣價，⚠️<strong>是繁體中文版卡片的價格，跟上方日圓價（日版卡）是不同印刷版本、不同市場</strong>，非官方定價、非成交均價，僅供粗略參考、不代表同一張卡跨市場比價。</p>
+        <p>卡名標示「（錯版）」的是<strong>印刷錯誤版</strong>（同卡號同稀有度，但因印刷瑕疵成為獨立收藏標的，價格常遠高於正常版），卡圖因來源限制暫沿用正常版圖片，實物印刷內容與圖片會有差異，僅供辨識參考。</p>
+        <p><strong>台幣參考價（標示「繁中版」）</strong>（M1L、M1S、M2、M2a、M4~M6，2026-08-25起）來源：卡拍拍（trade.kapaipai.tw）該卡目前最低掛賣價，⚠️<strong>是繁體中文版卡片的價格，跟上方日圓價（日版卡）是不同印刷版本、不同市場</strong>，非官方定價、非成交均價，僅供粗略參考、不代表同一張卡跨市場比價。</p>
       </details>
     </div>
   </header>
@@ -370,6 +371,7 @@ const SETS = {
   M4: { nameJp: "ニンジャスピナー", nameCn: "忍者飛旋", code: "M4", releaseDate: "2026-03-13" },
   M3: { nameJp: "ムニキスゼロ", nameCn: "虛無歸零", code: "M3", releaseDate: "2026-01-23" },
   M2: { nameJp: "インフェルノX", nameCn: "烈獄狂火X", code: "M2", releaseDate: "2025-09-26" },
+  M2a: { nameJp: "MEGAドリームex", nameCn: "超級進化夢想ex", code: "M2a", releaseDate: "2025-11-28" },
   M1L: { nameJp: "メガブレイブ", nameCn: "超級勇氣", code: "M1L", releaseDate: "2025-08-01" },
   M1S: { nameJp: "メガシンフォニア", nameCn: "超級交響樂", code: "M1S", releaseDate: "2025-08-01" },
 };
@@ -483,6 +485,49 @@ const CARDS = [
   {set:"M2", rank:8, nameJp:"メガミミロップex", nameCn:"超級長耳兔ex", rarity:"SAR", number:"114/080", price:1300,priceTWD:220, img:"img/M2-114-8-SAR.jpg", updated:"2026-08-26"},
   {set:"M2", rank:9, nameJp:"ポッチャマ", nameCn:"波加曼", rarity:"AR", number:"085/080", price:900,priceTWD:15, img:"img/M2-085-9-AR.jpg", updated:"2026-08-26"},
   {set:"M2", rank:10, nameJp:"ロトムex", nameCn:"洛托姆ex", rarity:"SAR", number:"112/080", price:800,priceTWD:100, img:"img/M2-112-10-SAR.jpg", updated:"2026-08-26"},
+
+  // ===== M2a 超級進化夢想ex（MEGAドリームex）=====
+  {set:"M2a", rank:1, nameJp:"メガリザードンXex：エラー版", nameCn:"超級噴火龍Xex（錯版）", rarity:"MA", number:"223/193", price:150000, img:"img/M2a-223-1-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:2, nameJp:"メガゲンガーex", nameCn:"超級耿鬼ex", rarity:"SAR", number:"240/193", price:51000,priceTWD:3500, img:"img/M2a-240-2-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:3, nameJp:"メガゲンガーex：エラー版", nameCn:"超級耿鬼ex（錯版）", rarity:"MA", number:"230/193", price:50000, img:"img/M2a-230-3-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:4, nameJp:"ピカチュウex", nameCn:"皮卡丘ex", rarity:"SAR", number:"234/193", price:38000,priceTWD:2295, img:"img/M2a-234-4-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:5, nameJp:"メガカイリューex", nameCn:"超級快龍ex", rarity:"MUR", number:"250/193", price:26000,priceTWD:2300, img:"img/M2a-250-5-MUR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:6, nameJp:"メガカイリューex", nameCn:"超級快龍ex", rarity:"SAR", number:"246/193", price:26000,priceTWD:2000, img:"img/M2a-246-6-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:7, nameJp:"メガルカリオex：エラー版", nameCn:"超級路卡利歐ex（錯版）", rarity:"MA", number:"228/193", price:20000, img:"img/M2a-228-7-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:8, nameJp:"メガサーナイトex：エラー版", nameCn:"超級沙奈朵ex（錯版）", rarity:"MA", number:"226/193", price:18000, img:"img/M2a-226-8-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:9, nameJp:"ロケット団のミュウツーex", nameCn:"火箭隊的超夢ex", rarity:"SAR", number:"237/193", price:16000,priceTWD:1100, img:"img/M2a-237-9-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:10, nameJp:"メガディアンシーex：エラー版", nameCn:"超級蒂安希ex（錯版）", rarity:"MA", number:"227/193", price:12000, img:"img/M2a-227-10-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:11, nameJp:"メガルチャブルex：エラー版", nameCn:"超級摔角鷹人ex（錯版）", rarity:"MA", number:"229/193", price:12000, img:"img/M2a-229-11-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:12, nameJp:"メガズルズキンex：エラー版", nameCn:"超級頭巾混混ex（錯版）", rarity:"MA", number:"231/193", price:10000, img:"img/M2a-231-12-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:13, nameJp:"メガカイリューex：エラー版", nameCn:"超級快龍ex（錯版）", rarity:"MA", number:"232/193", price:10000, img:"img/M2a-232-13-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:14, nameJp:"メガシビルドンex：エラー版", nameCn:"超級麻麻鰻魚王ex（錯版）", rarity:"MA", number:"225/193", price:10000, img:"img/M2a-225-14-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:15, nameJp:"Nのゾロアークex", nameCn:"N的索羅亞克ex", rarity:"SAR", number:"242/193", price:7000,priceTWD:859, img:"img/M2a-242-15-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:16, nameJp:"メガリザードンXex", nameCn:"超級噴火龍Xex", rarity:"MA", number:"223/193", price:5980,priceTWD:400, img:"img/M2a-223-16-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:17, nameJp:"メガユキメノコex：エラー版", nameCn:"超級雪妖女ex（錯版）", rarity:"MA", number:"224/193", price:5000, img:"img/M2a-224-17-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:18, nameJp:"マリィのオーロンゲex", nameCn:"瑪俐的長毛巨魔ex", rarity:"SAR", number:"243/193", price:3980,priceTWD:650, img:"img/M2a-243-18-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:19, nameJp:"ダイゴのメタグロスex", nameCn:"大吾的巨金怪ex", rarity:"SAR", number:"245/193", price:3600,priceTWD:400, img:"img/M2a-245-19-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:20, nameJp:"ナンジャモのハラバリーex", nameCn:"奇樹的電肚蛙ex", rarity:"SAR", number:"236/193", price:3480,priceTWD:599, img:"img/M2a-236-20-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:21, nameJp:"カナリィ", nameCn:"卡娜莉", rarity:"SAR", number:"248/193", price:3200,priceTWD:599, img:"img/M2a-248-21-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:22, nameJp:"メガゲンガーex", nameCn:"超級耿鬼ex", rarity:"MA", number:"230/193", price:2980,priceTWD:130, img:"img/M2a-230-22-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:23, nameJp:"メガユキメノコex", nameCn:"超級雪妖女ex", rarity:"SAR", number:"233/193", price:2100,priceTWD:350, img:"img/M2a-233-23-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:24, nameJp:"キチキギスex", nameCn:"吉雉雞ex", rarity:"SAR", number:"244/193", price:2100,priceTWD:400, img:"img/M2a-244-24-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:25, nameJp:"メガディアンシーex", nameCn:"超級蒂安希ex", rarity:"SAR", number:"238/193", price:2000,priceTWD:300, img:"img/M2a-238-25-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:26, nameJp:"コダック", nameCn:"可達鴨", rarity:"AR", number:"199/193", price:1980,priceTWD:69, img:"img/M2a-199-26-AR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:27, nameJp:"メガルチャブルex", nameCn:"超級摔角鷹人ex", rarity:"SAR", number:"239/193", price:1600,priceTWD:150, img:"img/M2a-239-27-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:28, nameJp:"アイリスの闘志", nameCn:"艾莉絲的鬥志", rarity:"SAR", number:"247/193", price:1600,priceTWD:240, img:"img/M2a-247-28-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:29, nameJp:"メガカイリューex", nameCn:"超級快龍ex", rarity:"MA", number:"232/193", price:1480,priceTWD:100, img:"img/M2a-232-29-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:30, nameJp:"メガズルズキンex", nameCn:"超級頭巾混混ex", rarity:"SAR", number:"241/193", price:1300,priceTWD:140, img:"img/M2a-241-30-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:31, nameJp:"メガシビルドンex", nameCn:"超級麻麻鰻魚王ex", rarity:"SAR", number:"235/193", price:1000,priceTWD:140, img:"img/M2a-235-31-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:32, nameJp:"カナリィ", nameCn:"卡娜莉", rarity:"SR", number:"219/193", price:980,priceTWD:300, img:"img/M2a-219-32-SR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:33, nameJp:"メガルカリオex", nameCn:"超級路卡利歐ex", rarity:"MA", number:"228/193", price:980,priceTWD:150, img:"img/M2a-228-33-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:34, nameJp:"サーファー", nameCn:"衝浪手", rarity:"SAR", number:"249/193", price:750,priceTWD:90, img:"img/M2a-249-34-SAR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:35, nameJp:"メガサーナイトex", nameCn:"超級沙奈朵ex", rarity:"MA", number:"226/193", price:680,priceTWD:60, img:"img/M2a-226-35-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:36, nameJp:"Nのゼクロム", nameCn:"N的捷克羅姆", rarity:"AR", number:"210/193", price:600,priceTWD:40, img:"img/M2a-210-36-AR.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:37, nameJp:"メガズルズキンex", nameCn:"超級頭巾混混ex", rarity:"MA", number:"231/193", price:500, img:"img/M2a-231-37-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:38, nameJp:"メガディアンシーex", nameCn:"超級蒂安希ex", rarity:"MA", number:"227/193", price:500,priceTWD:40, img:"img/M2a-227-38-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:39, nameJp:"メガルチャブルex", nameCn:"超級摔角鷹人ex", rarity:"MA", number:"229/193", price:500, img:"img/M2a-229-39-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:40, nameJp:"メガシビルドンex", nameCn:"超級麻麻鰻魚王ex", rarity:"MA", number:"225/193", price:500,priceTWD:30, img:"img/M2a-225-40-MA.jpg", updated:"2026-08-26"},
+  {set:"M2a", rank:41, nameJp:"ロケット団のミミッキュ", nameCn:"火箭隊的謎擬Q", rarity:"AR", number:"205/193", price:500, img:"img/M2a-205-41-AR.jpg", updated:"2026-08-26"},
 
   // ===== M1L 超級勇氣（メガブレイブ）=====
   {set:"M1L", rank:1, nameJp:"メガルカリオex", nameCn:"超級路卡利歐ex", rarity:"MUR", number:"092/063", price:50000,priceTWD:3600, img:"img/M1L-092-1-MUR.jpg", updated:"2026-08-26"},
