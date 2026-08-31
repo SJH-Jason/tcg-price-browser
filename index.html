@@ -50,6 +50,17 @@
   .meta-details summary:hover { text-decoration: underline; }
   .meta-details p { margin: 8px 0 0; }
 
+  .subtitle-details { margin-top: 2px; }
+  .subtitle-details summary {
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    outline: none;
+  }
+  .subtitle-details summary:hover { text-decoration: underline; }
+  .subtitle-details .set-list { margin-top: 4px; color: var(--text-dim); font-size: 0.85rem; line-height: 1.6; }
+
   .controls {
     display: flex;
     flex-wrap: wrap;
@@ -970,8 +981,11 @@ function populateRarityFilter() {
 function updateSubtitle() {
   const el = document.getElementById("setSubtitle");
   if (!state.setFilter) {
-    el.textContent = "日版現貨參考價（來源：晴れる屋2 hareruya2.com）・目前收錄：" +
-      Object.values(SETS).map(s => `${s.nameCn}(${s.code})`).join("、");
+    const sets = Object.values(SETS);
+    const setNames = sets.map(s => `${s.nameCn}(${s.code})`).join("、");
+    el.innerHTML = "日版現貨參考價（來源：晴れる屋2 hareruya2.com）" +
+      `<details class="subtitle-details"><summary>目前收錄 ${sets.length} 個套組（點開看清單）</summary>` +
+      `<div class="set-list">${setNames}</div></details>`;
   } else {
     const s = SETS[state.setFilter];
     el.textContent = `${s.nameJp}／${s.nameCn}（${s.code}，${s.releaseDate} 發售）・日版現貨參考價（來源：晴れる屋2 hareruya2.com）`;
