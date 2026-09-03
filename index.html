@@ -83,6 +83,17 @@
     outline: none;
   }
   input[type="text"]:focus, select:focus { border-color: var(--accent); }
+  #sortDirBtn {
+    background: #0f1115;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    min-width: 40px;
+  }
+  #sortDirBtn:hover { border-color: var(--accent); color: var(--accent); }
 
   .result-bar {
     display: flex;
@@ -349,11 +360,25 @@
         <option value="cn">中文卡圖</option>
       </select>
     </div>
+    <div class="field">
+      <label for="sortSelect">排序依據</label>
+      <div style="display:flex; gap:6px;">
+        <select id="sortSelect" style="flex:1;">
+          <option value="rank" selected>名次</option>
+          <option value="set">套組</option>
+          <option value="name">卡牌名稱</option>
+          <option value="rarity">版本</option>
+          <option value="number">卡號</option>
+          <option value="price">現貨價</option>
+        </select>
+        <button type="button" id="sortDirBtn" title="切換升冪／降冪" aria-label="切換升冪／降冪">↑</button>
+      </div>
+    </div>
   </div>
 
   <div class="result-bar">
     <span id="resultCount"></span>
-    <span>點欄位標題可切換排序 ↕</span>
+    <span>上方「排序依據」可換排序，桌機也可點欄位標題 ↕</span>
   </div>
 
   <table>
@@ -1207,6 +1232,11 @@ function render() {
     th.classList.toggle("active", th.dataset.sort === state.sortKey);
   });
 
+  const sortSelect = document.getElementById("sortSelect");
+  if (sortSelect) sortSelect.value = state.sortKey;
+  const sortDirBtn = document.getElementById("sortDirBtn");
+  if (sortDirBtn) sortDirBtn.textContent = state.sortDir === "asc" ? "↑" : "↓";
+
   renderPagination(totalPages);
 }
 
@@ -1255,6 +1285,16 @@ document.getElementById("priceModeSelect").addEventListener("change", (e) => {
 });
 document.getElementById("imgLangSelect").addEventListener("change", (e) => {
   state.imgLang = e.target.value;
+  render();
+});
+document.getElementById("sortSelect").addEventListener("change", (e) => {
+  const key = e.target.value;
+  state.sortKey = key;
+  state.sortDir = key === "price" ? "desc" : "asc";
+  render();
+});
+document.getElementById("sortDirBtn").addEventListener("click", () => {
+  state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
   render();
 });
 document.querySelectorAll("thead th").forEach(th => {
