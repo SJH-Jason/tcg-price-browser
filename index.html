@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>綠寶石風暴 M6 卡價查詢</title>
+<title>PTCG 寶卡拍</title>
 <style>
   :root {
     --bg: #0f1115;
@@ -294,7 +294,7 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>💎 MEGA 系列卡價查詢</h1>
+    <h1>💎 PTCG 寶卡拍</h1>
     <div class="subtitle" id="setSubtitle">日版現貨參考價（來源：晴れる屋2 hareruya2.com）</div>
     <div class="meta-note">
       <strong>收錄門檻：日圓現貨價 ¥500 以上才選入</strong>。價格為掛牌價、非成交歷史，會隨時間變動，各卡實際確認時間請看卡片下方「更新」日期。
@@ -1073,7 +1073,7 @@ function getFiltered() {
       case "rarity": av = a.rarity; bv = b.rarity; break;
       case "number": av = a.number; bv = b.number; break;
       case "price":
-        if (state.priceMode === "twd" || state.priceMode === "twd-only") { av = a.priceTWD ?? -1; bv = b.priceTWD ?? -1; }
+        if (state.priceMode === "twd" || state.priceMode === "twd-only") { av = a.priceTWD || -1; bv = b.priceTWD || -1; }
         else { av = a.price; bv = b.price; }
         break;
       default: av = a.rank; bv = b.rank;
@@ -1110,9 +1110,11 @@ function render() {
       : `<div class="thumb-placeholder">無圖</div>`;
 
     const jpyLine = `¥${c.price.toLocaleString()}`;
-    const twdLine = c.priceTWD != null
-      ? `繁中 NT$${c.priceTWD.toLocaleString()}`
-      : `<span class="no-data">尚無繁中版資料</span>`;
+    const twdLine = c.priceTWD == null
+      ? `<span class="no-data">尚無繁中版資料</span>`
+      : (c.priceTWD === 0
+        ? `<span class="no-data">繁中 待查</span>`
+        : `繁中 NT$${c.priceTWD.toLocaleString()}`);
     const updatedLine = `<div class="stock">更新 ${c.updated || "-"}</div>`;
 
     let priceMainHtml;
@@ -1139,7 +1141,7 @@ function render() {
       default: // "jpy"
         priceMainHtml = `
           ${jpyLine}
-          ${c.priceTWD != null ? `<div class="twd-price">${twdLine}</div>` : ""}
+          ${c.priceTWD != null ? `<div class="twd-price ${c.priceTWD === 0 ? "no-data" : ""}">${twdLine}</div>` : ""}
           ${updatedLine}
         `;
     }
