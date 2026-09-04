@@ -370,9 +370,9 @@
       <label for="sortSelect">排序依據</label>
       <div style="display:flex; gap:6px;">
         <select id="sortSelect" style="flex:1;">
-          <option value="rank" selected>名次</option>
+          <option value="rank">名次</option>
           <option value="name">卡牌名稱</option>
-          <option value="priceJpy">日幣價（¥）</option>
+          <option value="priceJpy" selected>日幣價（¥）</option>
           <option value="priceTwd">台幣價（NT$）</option>
         </select>
         <button type="button" id="sortDirBtn" title="切換升冪／降冪" aria-label="切換升冪／降冪">↑</button>
@@ -1066,8 +1066,8 @@ let state = {
   search: "",
   rarity: "",
   setFilter: "",
-  sortKey: "rank",
-  sortDir: "asc",
+  sortKey: "priceJpy",
+  sortDir: "desc",
   page: 1,
   pageSize: 10,
   priceMode: "jpy", // "jpy" | "twd"
