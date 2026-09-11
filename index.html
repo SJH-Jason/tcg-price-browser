@@ -372,6 +372,7 @@
         <select id="sortSelect" style="flex:1;">
           <option value="rank">名次</option>
           <option value="name">卡牌名稱</option>
+          <option value="number">卡號（序號）</option>
           <option value="priceJpy" selected>日幣價（¥）</option>
           <option value="priceTwd">台幣價（NT$）</option>
         </select>
@@ -1516,7 +1517,7 @@ function getFiltered() {
       case "set": av = a.set; bv = b.set; break;
       case "name": av = a.nameJp; bv = b.nameJp; break;
       case "rarity": av = a.rarity; bv = b.rarity; break;
-      case "number": av = a.number; bv = b.number; break;
+      case "number": av = parseInt(a.number, 10) || 0; bv = parseInt(b.number, 10) || 0; break;
       case "priceJpy": av = a.price; bv = b.price; break;
       case "priceTwd": av = a.priceTWD || -1; bv = b.priceTWD || -1; break;
       case "price":
