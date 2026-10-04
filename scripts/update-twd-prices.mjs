@@ -33,7 +33,9 @@ function sh(args, timeout = 60000) {
 function nav(url) { try { execFileSync("node", [OC, "browser", "navigate", url], { stdio: "ignore", timeout: 60000 }); } catch {} }
 function snap() { return sh(["browser", "snapshot"]); }
 
-// 從 index.html 抓卡片 {set, number(三碼), rarity}
+// 從 index.html 抓卡片 {set, number(三碼), rarity, hasTwd}
+// TWD_ONLY_MISSING=1(預設)：只抓尚無 priceTWD 的卡，不碰已填好的(避免重查污染已驗證值)
+const ONLY_MISSING = process.env.TWD_ONLY_MISSING !== "0";
 function parseCards(html, targets) {
   const cards = [];
   const re = /\{\s*set:"([^"]+)"[^}]*?\}/g;
@@ -44,6 +46,9 @@ function parseCards(html, targets) {
     const num = chunk.match(/number:"(\d{3})[^"]*"/);   // 只取純三碼卡號（跳過 R/RGB 這種特殊號，卡拍拍搜不到）
     const rar = chunk.match(/rarity:"([^"]*)"/);
     if (!num) continue;
+    const tm = chunk.match(/priceTWD:(\d+)/);
+    const hasTwd = tm && parseInt(tm[1], 10) > 0;
+    if (ONLY_MISSING && hasTwd) continue; // 已有台幣 → 跳過
     cards.push({ set, number: num[1], rarity: rar ? rar[1] : "" });
   }
   return cards;
@@ -56,24 +61,31 @@ function getSearchRef() {
   return m ? m[1] : null;
 }
 
-// 解析搜尋結果：回傳 [{price, rarity}]（每筆掛賣一組）
+// 解析搜尋結果：回傳 [{price, cardNo, version}]（每筆掛賣一組）
+// 卡拍拍結構(每筆)： $ → 價格 → 「起」→ 招式名 → 卡號(如 M6a-136 / CLL-008) → 版本(無標記/紀念版/大師球版…)
+// 注意：搜一個卡號可能連帶撈出別套組同圖卡(如搜 M6a-136 撈到 CLL-008 無標記版)，故要同時記卡號+版本，由 pickPrice 篩。
 function parseResults(s) {
   const lines = s.split("\n");
   const out = [];
   for (let i = 0; i < lines.length; i++) {
-    // 價格節點： generic [ref=..]: "6250"，其下一行是 起；再往下幾行有 rarity（MUR/SR/RR/AR/SAR/UR...）
+    // 價格節點： generic [ref=..]: "650"，其下一行是 起；其餘數字(數量徽章)不算
     const pm = lines[i].match(/generic \[ref=[a-z0-9]+\]:\s*"([0-9,]+)"/);
     if (!pm) continue;
     const qi = lines[i + 1] && lines[i + 1].includes("起");
-    if (!qi) continue; // 只認「起」價旁的數字，其餘數字(數量徽章)不算
+    if (!qi) continue;
     const price = parseInt(pm[1].replace(/,/g, ""), 10);
-    // 往下最多 8 行找 rarity（全大寫字母組）
-    let rarity = "";
-    for (let j = i + 1; j <= i + 10 && j < lines.length; j++) {
-      const rm = lines[j].match(/generic \[ref=[a-z0-9]+\]:\s*([A-Z]{1,4})\s*(?:\[new\])?\s*$/);
-      if (rm) { rarity = rm[1]; break; }
+    // 從「起」往下找：先遇到卡號(字母數字-數字格式)，其下一行即版本中文標示
+    let cardNo = "", version = "";
+    for (let j = i + 1; j <= i + 14 && j < lines.length; j++) {
+      const cm = lines[j].match(/generic \[ref=[a-z0-9]+\]:\s*([A-Za-z0-9]+-\d+)\s*(?:\[new\])?\s*$/);
+      if (cm) {
+        cardNo = cm[1];
+        const vm = lines[j + 1] && lines[j + 1].match(/generic \[ref=[a-z0-9]+\]:\s*([^\[\n]+?)\s*(?:\[new\])?\s*$/);
+        if (vm) version = vm[1].trim();
+        break;
+      }
     }
-    out.push({ price, rarity });
+    out.push({ price, cardNo, version });
   }
   return out;
 }
@@ -85,6 +97,9 @@ async function queryCard(searchRef, set, number) {
   return parseResults(snap());
 }
 
+// 版本正規化：去空白，判斷是否「無標記」
+const isNoMark = (v) => /無標記/.test(String(v || ""));
+
 function cachePath(set, number) { return join(CACHE, `${set}-${number}.json`); }
 function readCache(set, number) {
   const p = cachePath(set, number);
@@ -93,15 +108,18 @@ function readCache(set, number) {
 }
 function writeCache(set, number, data) { writeFileSync(cachePath(set, number), JSON.stringify({ date: TODAY, ...data })); }
 
-// 依稀有度挑價：完全相符優先；找不到相符 → null（不亂猜）
-function pickPrice(results, rarity) {
+// 依「卡號」挑價（卡凡 2026-10-04 定：用卡號比對；無標記多為預組/卡包內容卡）
+// 關鍵：搜一個卡號會連帶撈出同圖的別張卡(別卡號)，故必須先鎖定「本卡號」那筆，別抓到鄰卡。
+// 並非每張卡都有「無標記」版(AR/SR 等特殊卡版本欄就是 AR/SR)；只有本卡號有多筆時才用無標記優先。
+// 順序：①本卡號且無標記 → ②本卡號任一版本最低 → ③完全沒有本卡號 → null(不亂抓鄰卡)
+function pickPrice(results, selfCardNo) {
   if (!results.length) return { price: null, reason: "no-listing" };
-  if (rarity) {
-    const match = results.filter((r) => r.rarity === rarity);
-    if (match.length) return { price: Math.min(...match.map((r) => r.price)), reason: "rarity-match" };
-    return { price: null, reason: "rarity-mismatch" }; // 有掛賣但稀有度對不上 → 不寫，避免版本污染
-  }
-  return { price: Math.min(...results.map((r) => r.price)), reason: "no-rarity-info" };
+  const self = results.filter((r) => r.cardNo === selfCardNo);
+  if (!self.length) return { price: null, reason: "no-self-match" }; // 搜到的全是鄰卡 → 不寫
+  const selfNoMark = self.filter((r) => isNoMark(r.version));
+  if (selfNoMark.length) return { price: Math.min(...selfNoMark.map((r) => r.price)), reason: "nomark-self" };
+  // 本卡號無「無標記」版(例如 AR/SR 特殊卡) → 取本卡號最低價
+  return { price: Math.min(...self.map((r) => r.price)), reason: "self-lowest" };
 }
 
 function writeBackTwd(html, updates) {
@@ -153,10 +171,17 @@ async function main() {
     if (!searchRef) { console.log(`  ⚠️ 抓不到搜尋框，略過 ${c.set}-${c.number}`); continue; }
 
     const results = await queryCard(searchRef, c.set, c.number);
-    const { price, reason } = pickPrice(results, c.rarity);
+    const { price, reason } = pickPrice(results, `${c.set}-${c.number}`);
     writeCache(c.set, c.number, { price, reason, rarity: c.rarity });
-    if (price != null) { updates.push({ set: c.set, number: c.number, price }); }
-    else { misses.push(`${c.set}-${c.number}(${c.rarity||"?"}):${reason}`); }
+    if (price != null) {
+      updates.push({ set: c.set, number: c.number, price });
+    } else if (reason === "no-listing" || reason === "no-self-match") {
+      // 卡凡 2026-10-04 定：查無本卡掛賣 → 標 priceTWD:1 當「暫無行情」佔位，日後有上架再更新
+      updates.push({ set: c.set, number: c.number, price: 1 });
+      misses.push(`${c.set}-${c.number}(${c.rarity||"?"}):${reason}→標1`);
+    } else {
+      misses.push(`${c.set}-${c.number}(${c.rarity||"?"}):${reason}`);
+    }
     done++;
     if (done % 5 === 0) console.log(`  ...已查 ${done}/${Math.min(LIMIT, pending.length)}`);
   }
